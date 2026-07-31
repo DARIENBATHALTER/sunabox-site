@@ -1,0 +1,242 @@
+<!doctype html>
+<!--
+  SunaBox — sunabox.dev
+  Copyright (C) 2026 Darien Bathalter. All rights reserved (site content).
+  Sister site to engine.sunabox.dev. The game runs at sunabox.darienbathalter.com;
+  its engine is open source (AGPL-3.0): github.com/DARIENBATHALTER/sunaengine
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SunaBox — the particle sandbox that remembers</title>
+<meta name="description" content="Paint 27 kinds of matter, build machines, set it all on fire — in your browser. A modern reincarnation of OE-CAKE on a bit-exact engine: every session can be replayed, rewound, and shared.">
+<link rel="icon" href="assets/icon-128.png">
+<style>
+  :root {
+    color-scheme: dark;
+    --paper:  #0a0e16;
+    --panel:  #111726;
+    --ink:    #eae7de;
+    --ink-2:  #a29d90;
+    --hair:   #242c3d;
+    --accent: #4ab3f2;
+    --serif: Charter, 'Iowan Old Style', Georgia, serif;
+    --sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --mono:  ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 400 1.02rem/1.65 var(--sans);
+    padding-bottom: 5rem;
+  }
+  .prose { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+  .wide  { max-width: 66rem; margin: 0 auto; padding: 0 1.25rem; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(74,179,242,0.35); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.25rem; height: 52px;
+    background: rgba(10, 14, 22, 0.74);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .navBrand { display: flex; align-items: center; gap: 0.55rem;
+              font: 700 0.95rem/1 var(--sans); color: var(--ink);
+              text-decoration: none; border-bottom: none; }
+  .navBrand img { width: 26px; height: 26px; }
+  .navBrand b { color: var(--accent); font-weight: 700; }
+  .navLinks { display: flex; align-items: center; gap: 1.3rem; }
+  .navLinks a { font: 500 0.84rem/1 var(--sans); color: var(--ink-2);
+                text-decoration: none; border-bottom: none; }
+  .navLinks a:hover { color: var(--ink); }
+  .navLinks a.play { border: 1px solid var(--accent); border-radius: 999px;
+                     padding: 0.45em 1.1em; color: var(--accent); }
+  .navLinks a.play:hover { background: var(--accent); color: var(--paper); }
+  section, [id] { scroll-margin-top: 64px; }
+  @media (max-width: 640px) { .navLinks a:not(.play) { display: none; } }
+
+  .hero { position: relative; overflow: hidden; text-align: center; }
+  .hero video, .hero .poster {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.45; z-index: 0;
+  }
+  .hero .poster { background: url('assets/hero_poster.jpg') center/cover; }
+  .hero .shade {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(10,14,22,0.42) 0%,
+                rgba(10,14,22,0.66) 55%, var(--paper) 96%);
+  }
+  .hero .inner { position: relative; z-index: 2; padding: 6.4rem 1.25rem 3.4rem; }
+  .heroMark { width: 130px; height: auto; display: block; margin: 0 auto;
+              filter: drop-shadow(0 0 30px rgba(74, 179, 242, 0.45)); }
+  h1 {
+    font: 800 clamp(2.3rem, 5.6vw, 3.5rem)/1.1 var(--sans);
+    letter-spacing: -0.022em; margin: 1.2rem auto 1rem; max-width: 52rem;
+  }
+  h1 .l2 { color: var(--accent); text-shadow: 0 0 26px rgba(74, 179, 242, 0.45); }
+  .lead { font-size: 1.13rem; max-width: 40rem; margin: 0 auto; }
+  .cta { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.9rem; }
+  .cta a { font: 600 0.95rem/1 var(--sans); border-radius: 999px; padding: 0.85em 1.7em;
+           text-decoration: none; border-bottom: none; }
+  .cta a.primary { background: var(--accent); color: var(--paper); border: 1px solid var(--accent); }
+  .cta a.primary:hover { filter: brightness(1.12); }
+  .cta a.quiet { border: 1px solid var(--hair); color: var(--ink); }
+  .cta a.quiet:hover { border-color: var(--ink-2); }
+  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin-top: 1.7rem; }
+  .chips span { font: 500 0.78rem/1 var(--sans); color: var(--ink-2);
+                border: 1px solid var(--hair); border-radius: 999px;
+                padding: 0.5em 1em; background: rgba(10, 14, 22, 0.4); }
+  .chips span.hot { color: var(--accent); border-color: var(--accent); }
+
+  h2 { font: 700 1.3rem/1.3 var(--sans); letter-spacing: 0.2em;
+       text-transform: uppercase; color: var(--accent); margin: 3.4rem 0 1rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+          gap: 1rem; margin-top: 1.4rem; }
+  .card { background: var(--panel); border: 1px solid var(--hair); border-radius: 6px;
+          padding: 1.1rem 1.2rem; }
+  .card h3 { font: 700 1rem/1.3 var(--sans); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.92rem; color: var(--ink-2); }
+
+  .film { border: 1px solid var(--hair); border-radius: 6px; overflow: hidden;
+          margin-top: 1.4rem; background: #05070d; }
+  .film video { display: block; width: 100%; height: auto; }
+
+  .loveletter { border-left: 2px solid var(--accent); padding-left: 1.1rem;
+                margin-top: 1.4rem; color: var(--ink-2); font-style: italic; }
+  footer { margin-top: 4rem; text-align: center; font: 400 0.8rem/1.7 var(--sans);
+           color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <a class="navBrand" href="#"><img src="assets/icon-128.png" alt="">
+    <span><b>Suna</b>Box</span></a>
+  <div class="navLinks">
+    <a href="#features">Features</a>
+    <a href="#loveletter">The Love Letter</a>
+    <a href="https://engine.sunabox.dev">Engine</a>
+    <a class="play" href="https://sunabox.darienbathalter.com">Play free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="poster" aria-hidden="true"></div>
+  <video id="heroVid" autoplay muted loop playsinline preload="metadata"
+         poster="assets/hero_poster.jpg" aria-hidden="true">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="inner">
+    <img class="heroMark" src="assets/logo.png" alt="SunaBox">
+    <h1><span class="l1">Paint matter. Build machines.</span><br>
+        <span class="l2">Every drop remembered.</span></h1>
+    <p class="lead">
+      SunaBox is a physics sandbox in the spirit of the legendary OE-CAKE —
+      27 kinds of matter you paint straight into the world, machines that
+      really run, and fire that really spreads. It runs free in your browser,
+      and because its engine is bit-exact, every session can be replayed,
+      rewound, and shared as a few kilobytes of proof.
+    </p>
+    <div class="cta">
+      <a class="primary" href="https://sunabox.darienbathalter.com">Play in your browser</a>
+      <a class="quiet" href="https://engine.sunabox.dev">Meet the engine</a>
+    </div>
+    <div class="chips">
+      <span class="hot">Free in browser</span>
+      <span>27 materials</span>
+      <span>Opens OE-CAKE .oec files</span>
+      <span>Deterministic replays</span>
+      <span>Coming to Steam</span>
+    </div>
+  </div>
+</div>
+
+<section class="wide" id="features">
+  <h2>What you can do</h2>
+  <div class="grid">
+    <div class="card"><h3>Paint 27 kinds of matter</h3>
+      <p>Water, gel, oil, mercury, acid, nitro, rice, rubber, wood, stone,
+         metal, ice, lava, fire, smoke, steam and more — each with real
+         thermodynamics. Ice melts, wood burns to ash, steam condenses,
+         nitro does what nitro does.</p></div>
+    <div class="card"><h3>Build machines that run</h3>
+      <p>Weld strokes into rigid bodies, pin them on axles, drive them with
+         jets, stretch rubber into slingshots, or take the controls yourself —
+         arrow keys drive what you paint.</p></div>
+    <div class="card"><h3>Import anything</h3>
+      <p>Drop a PNG into the world and it becomes matter — your drawing, your
+         photo, rigid or fluid or flammable. Old OE-CAKE <code>.oec</code>
+         scenes open too, preserved exactly.</p></div>
+    <div class="card"><h3>Rewind time</h3>
+      <p>The engine is bit-exact, so a session is a starting state plus your
+         inputs — a few kilobytes. Replay it, scrub it backwards, share it as
+         a link that provably reproduces the same world, bit for bit.</p></div>
+    <div class="card"><h3>Classic Mode</h3>
+      <p>One toggle and the toolbar becomes OE-CAKE's, laid out exactly as
+         you remember it — same buttons, same order, same feel, fifteen years
+         later.</p></div>
+    <div class="card"><h3>An open engine</h3>
+      <p>SunaBox runs on SunaEngine, our open-source (AGPL-3.0) bit-exact
+         physics engine. The claims are proven live, on your GPU, at
+         <a href="https://engine.sunabox.dev">engine.sunabox.dev</a>.</p></div>
+  </div>
+
+  <div class="film">
+    <video autoplay muted loop playsinline preload="metadata" id="filmVid"
+           poster="assets/hero_poster.jpg">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<section class="prose" id="loveletter">
+  <h2>The love letter</h2>
+  <p>
+    In 2007, Prometech Software released <strong>OE-CAKE!</strong> — a demo of
+    their OctaveEngine that became, almost by accident, one of the most loved
+    physics toys ever made. It disappeared; the community that traded scenes
+    and tricks for fifteen years never did.
+  </p>
+  <p class="loveletter">
+    SunaBox is our love letter to OE-CAKE! and to that community: a clean-room
+    reincarnation, rebuilt from scratch for the modern browser, that opens
+    your old <code>.oec</code> files and honors what made the original feel
+    alive — then keeps going where 2007 could not.
+  </p>
+</section>
+
+<footer>
+  <p>SunaBox — coming to Steam. Engine open source at
+     <a href="https://github.com/DARIENBATHALTER/sunaengine">github.com/DARIENBATHALTER/sunaengine</a>.</p>
+  <p>OE-CAKE! and OctaveEngine are the work of Prometech Software, Inc.
+     SunaBox is an independent tribute, not affiliated with or endorsed by Prometech.</p>
+  <p>&copy; 2026 Darien Bathalter</p>
+</footer>
+
+<script>
+(() => {
+  for (const id of ['heroVid', 'filmVid']) {
+    const v = document.getElementById(id);
+    if (!v) continue;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); continue; }
+    v.play().catch(() => {});
+    new IntersectionObserver((es) => {
+      for (const e of es) e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+    }).observe(v);
+  }
+  document.addEventListener('visibilitychange', () => {
+    for (const id of ['heroVid', 'filmVid']) {
+      const v = document.getElementById(id);
+      if (v) { if (document.hidden) v.pause(); else v.play().catch(() => {}); }
+    }
+  });
+})();
+</script>
+</body>
+</html>
