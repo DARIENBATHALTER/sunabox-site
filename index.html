@@ -45,10 +45,11 @@
     -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--hair);
   }
-  .navBrand { display: flex; align-items: center; gap: 0.55rem;
-              font: 700 0.95rem/1 var(--sans); color: var(--ink);
+  /* Shared standard with engine.sunabox.dev (2026-08-01): 34px mark, 1.08rem title. */
+  .navBrand { display: flex; align-items: center; gap: 0.6rem;
+              font: 700 1.08rem/1 var(--sans); color: var(--ink);
               text-decoration: none; border-bottom: none; }
-  .navBrand img { width: 26px; height: 26px; }
+  .navBrand img { width: 34px; height: 34px; }
   .navBrand b { color: var(--accent); font-weight: 700; }
   .navLinks { display: flex; align-items: center; gap: 1.3rem; }
   .navLinks a { font: 500 0.84rem/1 var(--sans); color: var(--ink-2);
@@ -76,7 +77,8 @@
                 rgba(12,9,19,0.38) 55%, var(--paper) 96%);
   }
   .hero .inner { position: relative; z-index: 2; padding: 6.4rem 1.25rem 3.4rem; }
-  .heroMark { width: 130px; height: auto; display: block; margin: 0 auto;
+  /* 140px, centred, glow + dark seat — the shared standard with the engine site. */
+  .heroMark { width: 140px; height: auto; display: block; margin: 0 auto;
               filter: drop-shadow(0 0 30px rgba(176, 125, 240, 0.5))
                       drop-shadow(0 3px 14px rgba(0, 0, 0, 0.65)); }
   h1 {
@@ -179,9 +181,9 @@
          jets, stretch rubber into slingshots, or take the controls yourself.
          The arrow keys can drive what you paint.</p></div>
     <div class="card"><h3>Import anything</h3>
-      <p>Drop in any PNG.<br>It becomes matter.<br><br>
-         Your drawing. Your logo. A photo of your cat.<br>
-         Rigid. Liquid. Flammable.<br>Whatever you choose.<br><br>
+      <p>Drop in any PNG and it becomes matter.<br>
+         Your drawing. Your logo. A photo of your cat.
+         Rigid. Liquid. Flammable.<br>Whatever you choose.<br>
          Old OE-CAKE <code>.oec</code> scenes open too, preserved exactly.</p></div>
     <div class="card"><h3>Rewind time</h3>
       <p>The engine is bit-exact, so a session is a starting state plus your
@@ -194,8 +196,8 @@
          muscle memory, fifteen years later.</p></div>
     <div class="card"><h3>Built on SunaEngine</h3>
       <p>Every simulation in SunaBox runs on SunaEngine, our open-source
-         deterministic physics engine. Curious how it works?<br><br>
-         See it prove itself <strong>live</strong>:
+         deterministic physics engine. Curious how it works?<br>
+         See it prove itself live:
          <a href="https://engine.sunabox.dev">engine.sunabox.dev</a>.</p></div>
   </div>
 
@@ -210,7 +212,7 @@
 <section class="prose" id="loveletter">
   <h2>The love letter</h2>
   <p>
-    In 2007, Prometech released <strong>OE-CAKE.</strong><br><br>
+    In 2007, Prometech released &ldquo;<strong>OE-CAKE!</strong>&rdquo;<br><br>
     It was supposed to be a technology demo&hellip; instead, it quietly became
     one of the internet's favorite physics toys. People kept building with it:
     trading scenes, discovering tricks, making tiny works of art. Even after
@@ -232,7 +234,7 @@
   <p>SunaBox is coming to Steam. Engine open source at
      <a href="https://github.com/DARIENBATHALTER/sunaengine">github.com/DARIENBATHALTER/sunaengine</a>.</p>
   <p>OE-CAKE! and OctaveEngine are the work of Prometech Software, Inc.
-     SunaBox is an independent tribute, not affiliated with or endorsed by Prometech.</p>
+     SunaBox is an independent project, not affiliated with or endorsed by Prometech.</p>
   <p>SunaBox is a love letter to <em>OE-CAKE!</em> (Prometech Software, 2007) and the
      Japanese lineage of particle simulation it came from. &ldquo;Suna&rdquo; is Japanese
      for sand; this is a sandbox, in the oldest sense of the word.</p>
