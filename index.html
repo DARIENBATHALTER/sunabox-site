@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SunaBox — the particle sandbox that remembers</title>
-<meta name="description" content="Paint in 27 shades of matter, build machines, set it all on fire, in your browser. A modern reincarnation of OE-CAKE on a bit-exact engine: every session can be replayed, rewound, and shared.">
+<meta name="description" content="Paint in 32 shades of matter, build machines, set it all on fire, in your browser. A modern reincarnation of OE-CAKE on a bit-exact engine: every session can be replayed, rewound, and shared.">
 <link rel="icon" href="assets/icon-128.png">
 <style>
   :root {
@@ -94,6 +94,8 @@
            text-decoration: none; border-bottom: none; }
   .cta a.primary { background: var(--accent); color: var(--paper); border: 1px solid var(--accent); }
   .cta a.primary:hover { filter: brightness(1.12); }
+  .cta a.pending { opacity: 0.62; cursor: default; }
+  .cta a.pending:hover { border-color: inherit; }
   .cta a.quiet { border: 1px solid var(--hair); color: var(--ink); }
   .cta a.quiet:hover { border-color: var(--ink-2); }
   .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin-top: 1.7rem; }
@@ -147,23 +149,26 @@
         <span class="l2"><em>Then press rewind.</em></span></h1>
     <p class="lead">
       SunaBox is a physics sandbox in the spirit of the legendary OE-CAKE:
-      27 kinds of matter you paint straight into the world, machines that
+      32 kinds of matter you paint straight into the world, machines that
       really run, fire that really spreads, and more.<br><br>
       It runs free in your browser, and because its engine is bit-exact,
       every recorded session can easily be replayed, rewound, saved, and
       shared with friends.
     </p>
     <div class="cta">
-      <a class="primary" href="https://sunabox.darienbathalter.com">Play in your browser</a>
+      <a class="primary" href="https://sunabox.darienbathalter.com">Play free in your browser</a>
+      <!-- data-steam: inert text until STEAM_URL is filled in below, then a
+           real link. ONE edit lights up every Steam affordance on the page. -->
+      <a class="quiet steamCta" data-steam href="#">Wishlist on Steam</a>
       <a class="quiet" href="https://engine.sunabox.dev">Meet the engine</a>
     </div>
     <div class="chips">
       <span class="hot">Free in browser</span>
-      <span>27 materials</span>
+      <span>32 materials</span>
       <span>Opens OE-CAKE .oec files</span>
       <span>Perfect replays</span>
       <span>40,000 particles at 80 fps</span>
-      <span>Coming to Steam</span>
+      <span data-steam-chip>Coming to Steam</span>
     </div>
   </div>
 </div>
@@ -171,7 +176,7 @@
 <section class="wide" id="features">
   <h2>What you can do</h2>
   <div class="grid">
-    <div class="card"><h3>Paint 27 kinds of matter</h3>
+    <div class="card"><h3>Paint 32 kinds of matter</h3>
       <p>Water, gel, oil, mercury, acid, nitro, rice, rubber, wood, stone,
          metal, ice, lava, fire, smoke, steam and more. Every material
          behaves differently. Ice melts. Wood burns to ash. Steam condenses.
@@ -245,6 +250,22 @@
 </footer>
 
 <script>
+// ============================================================================
+// THE STEAM SWITCH. Fill this in the day the store page is approved and every
+// affordance on the page turns into a real link at once; leave it empty and
+// they stay honest inert text. Nothing else needs editing.
+// ============================================================================
+const STEAM_URL = '';
+(() => {
+  const live = !!STEAM_URL;
+  for (const a of document.querySelectorAll('[data-steam]')) {
+    if (live) { a.href = STEAM_URL; a.target = '_blank'; a.rel = 'noopener'; }
+    else { a.removeAttribute('href'); a.classList.add('pending'); a.textContent = 'Coming to Steam'; }
+  }
+  for (const c of document.querySelectorAll('[data-steam-chip]')) {
+    if (live) c.textContent = 'Wishlist on Steam';
+  }
+})();
 (() => {
   for (const id of ['heroVid', 'filmVid']) {
     const v = document.getElementById(id);
