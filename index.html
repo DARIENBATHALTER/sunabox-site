@@ -117,6 +117,47 @@
           margin-top: 1.4rem; background: #05070d; }
   .film video { display: block; width: 100%; height: auto; }
 
+  /* ---- Exclusive to Steam -------------------------------------------------
+     Steam's own blue (#1b2838 seat, #66c0f4 ink) is deliberately NOT used as
+     the accent: the page keeps its violet so the section reads as part of
+     SunaBox rather than a pasted-in advert. The blue appears only inside the
+     button, which is the one place a player is looking for it. */
+  .steamHead { display: flex; align-items: center; gap: 0.7rem; margin: 3.4rem 0 0.6rem; }
+  .steamHead h2 { margin: 0; }
+  .steamMark { width: 26px; height: 26px; color: var(--accent); flex: none; }
+  .steamLead { color: var(--ink-2); max-width: 44rem; }
+  .steamLead b { color: var(--ink); font-weight: 650; }
+  /* The ceiling table. Two numbers side by side beat a sentence about them. */
+  .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+           gap: 1rem; margin-top: 1.4rem; }
+  .tier { background: var(--panel); border: 1px solid var(--hair);
+          border-radius: 6px; padding: 1.1rem 1.2rem; }
+  .tier.full { border-color: var(--accent); }
+  .tier .who { font: 600 0.74rem/1 var(--sans); letter-spacing: 0.16em;
+               text-transform: uppercase; color: var(--ink-2); }
+  .tier.full .who { color: var(--accent); }
+  .tier dl { display: grid; grid-template-columns: 1fr auto; gap: 0.45rem 1rem;
+             margin-top: 0.9rem; font-size: 0.92rem; }
+  .tier dt { color: var(--ink-2); }
+  .tier dd { font: 650 0.95rem/1.4 var(--mono); color: var(--ink); text-align: right; }
+  .tier.full dd { color: var(--accent); }
+  /* FOUR cards, so the shared auto-fit grid orphans the fourth on a wide
+     screen (3 + 1). A 24rem minimum forces 2 x 2 inside the 66rem column and
+     still collapses to one column on a phone. */
+  .steamGrid { grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr)); }
+  .steamCtaRow { display: flex; align-items: center; gap: 1rem;
+                 flex-wrap: wrap; margin-top: 1.8rem; }
+  .steamBtn { display: inline-flex; align-items: center; gap: 0.6rem;
+              font: 650 0.95rem/1 var(--sans); border-radius: 999px;
+              padding: 0.8em 1.5em; text-decoration: none; border-bottom: none;
+              background: #1b2838; color: #c7d5e0; border: 1px solid #2a475e; }
+  .steamBtn:hover { background: #22374a; border-color: #66c0f4; color: #fff; }
+  .steamBtn svg { width: 20px; height: 20px; flex: none; }
+  .steamBtn.pending { opacity: 0.62; cursor: default; }
+  .steamBtn.pending:hover { background: #1b2838; border-color: #2a475e; color: #c7d5e0; }
+  .steamWhen { font-size: 0.86rem; color: var(--ink-2); }
+  .steamWhen b { color: var(--ink); font-weight: 650; }
+
   .loveletter { border-left: 2px solid var(--accent); padding-left: 1.1rem;
                 margin-top: 1.4rem; color: var(--ink-2); font-style: italic; }
   footer { margin-top: 4rem; text-align: center; font: 400 0.8rem/1.7 var(--sans);
@@ -130,6 +171,7 @@
     <span><b>Suna</b>Box</span></a>
   <div class="navLinks">
     <a href="#features">Features</a>
+    <a href="#steam">Steam</a>
     <a href="#loveletter">About</a>
     <a href="https://engine.sunabox.dev">Engine</a>
     <a class="play" href="https://sunabox.darienbathalter.com">Play free</a>
@@ -167,7 +209,11 @@
       <span>32 materials</span>
       <span>Opens OE-CAKE .oec files</span>
       <span>Perfect replays</span>
-      <span>40,000 particles at 80 fps</span>
+      <!-- was "40,000 particles at 80 fps". The free build clamps at 15,000, so
+           next to the ceiling table below that read as a contradiction. The
+           throughput claim still lives in the Steam section, where it belongs
+           to the build that can actually reach it. -->
+      <span>Opens in one click, no install</span>
       <span data-steam-chip>Coming to Steam</span>
     </div>
   </div>
@@ -211,6 +257,101 @@
            poster="assets/hero_poster.jpg">
       <source src="assets/hero.mp4" type="video/mp4">
     </video>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     EXCLUSIVE TO STEAM. Placed after the features and before the love letter
+     on purpose: show what the thing IS, ask for the wishlist while that is
+     still in the reader's hands, then close on why it exists. The hero CTA
+     catches whoever never scrolls.
+
+     Every Steam affordance here rides the SAME `data-steam` switch as the hero
+     button, so the day the store page is approved, filling in STEAM_URL at the
+     bottom of this file lights up all of them at once and nothing else needs
+     editing. Until then they are inert text that says "Coming to Steam", which
+     is the truth and is not a dead link.
+     ====================================================================== -->
+<section class="wide" id="steam">
+  <div class="steamHead">
+    <svg class="steamMark" viewBox="0 0 32 32" aria-hidden="true">
+      <mask id="steamValveA">
+        <circle cx="16" cy="16" r="15.5" fill="#fff"/>
+        <path d="M20.5 11.5 L1.5 29" stroke="#000" stroke-width="4.7" stroke-linecap="butt"/>
+        <circle cx="20.5" cy="11.5" r="6.4" fill="#000"/>
+        <circle cx="9" cy="22" r="4.9" fill="#000"/>
+        <circle cx="20.5" cy="11.5" r="3.0" fill="#fff"/>
+        <circle cx="9" cy="22" r="2.1" fill="#fff"/>
+      </mask>
+      <circle cx="16" cy="16" r="15.5" fill="currentColor" mask="url(#steamValveA)"/>
+    </svg>
+    <h2>Exclusive to Steam</h2>
+  </div>
+  <p class="steamLead">
+    The browser version is the <b>demo</b>, and it stays free. It is the whole
+    toy: every material, every tool, every render mode, and full replay export
+    and import. What the Steam build removes is the ceiling, and what it adds
+    is everywhere you want to take your scenes afterwards.
+  </p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="who">Free in browser</div>
+      <dl>
+        <dt>Particle ceiling</dt><dd>15,000</dd>
+        <dt>World resolution</dt><dd>1.8&times;</dd>
+        <dt>Runs in</dt><dd>any browser</dd>
+      </dl>
+    </div>
+    <div class="tier full">
+      <div class="who">SunaBox on Steam</div>
+      <dl>
+        <dt>Particle ceiling</dt><dd>131,071</dd>
+        <dt>World resolution</dt><dd>4&times;</dd>
+        <dt>Runs in</dt><dd>native app</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="grid steamGrid">
+    <div class="card"><h3>The whole particle ceiling</h3>
+      <p>131,071 bonded particles instead of 15,000. That is the engine's real
+         limit rather than a sandbox clamp, and it is roughly nine times the
+         room. Big machines. Whole cities of matter. The scene you had to keep
+         deleting half of.</p></div>
+    <div class="card"><h3>Full simulation resolution</h3>
+      <p>4&times; worlds against the browser's 1.8&times;. More particles per
+         world unit means finer detail in the same space: thinner sheets,
+         smaller moving parts, water that reads as water instead of as beads.</p></div>
+    <div class="card"><h3>Built for your machine</h3>
+      <p>A native app for Windows, macOS and Linux, with a Steam Deck build.
+         No browser tab between you and the GPU, no tab-switch stutter, and the
+         throughput to keep tens of thousands of particles at a smooth frame
+         rate.</p></div>
+    <div class="card"><h3>Steam Workshop</h3>
+      <p>Publish a replay and let it prove itself on someone else's machine,
+         bit for bit. Browse, subscribe, vote. Because a session is a starting
+         state plus your inputs, what you share is tiny and what they watch is
+         exactly what you built.</p></div>
+  </div>
+
+  <div class="steamCtaRow">
+    <a class="steamBtn" data-steam href="#">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+      <mask id="steamValveB">
+        <circle cx="16" cy="16" r="15.5" fill="#fff"/>
+        <path d="M20.5 11.5 L1.5 29" stroke="#000" stroke-width="4.7" stroke-linecap="butt"/>
+        <circle cx="20.5" cy="11.5" r="6.4" fill="#000"/>
+        <circle cx="9" cy="22" r="4.9" fill="#000"/>
+        <circle cx="20.5" cy="11.5" r="3.0" fill="#fff"/>
+        <circle cx="9" cy="22" r="2.1" fill="#fff"/>
+      </mask>
+      <circle cx="16" cy="16" r="15.5" fill="currentColor" mask="url(#steamValveB)"/>
+    </svg>
+      <span data-steam-label>Wishlist on Steam</span>
+    </a>
+    <span class="steamWhen">Full release <b>November 2, 2026</b>. Play the free
+      demo now, in your browser.</span>
   </div>
 </section>
 
@@ -259,8 +400,14 @@ const STEAM_URL = '';
 (() => {
   const live = !!STEAM_URL;
   for (const a of document.querySelectorAll('[data-steam]')) {
-    if (live) { a.href = STEAM_URL; a.target = '_blank'; a.rel = 'noopener'; }
-    else { a.removeAttribute('href'); a.classList.add('pending'); a.textContent = 'Coming to Steam'; }
+    if (live) { a.href = STEAM_URL; a.target = '_blank'; a.rel = 'noopener'; continue; }
+    a.removeAttribute('href');
+    a.classList.add('pending');
+    // Write the LABEL, not the anchor. The Steam-section button carries an
+    // inline logo beside its text, and setting textContent on the anchor would
+    // delete the SVG along with the words. Plain anchors have no label span and
+    // fall back to themselves, which is the hero button's original behaviour.
+    (a.querySelector('[data-steam-label]') || a).textContent = 'Coming to Steam';
   }
   for (const c of document.querySelectorAll('[data-steam-chip]')) {
     if (live) c.textContent = 'Wishlist on Steam';
