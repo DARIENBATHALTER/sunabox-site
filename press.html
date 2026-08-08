@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+  SunaBox press page — sunabox.dev/press.html
+  PURPOSE-BUILT for the Steam store's "Visit the Website" link, which may not
+  lead anywhere the game is directly playable (store review, 2026-08-08).
+  Therefore, DELIBERATELY: no play links, no nav to the main site, no links
+  that reach the playable app. Keep it that way.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SunaBox — Press &amp; Info</title>
+<meta name="description" content="SunaBox is a modern physics sandbox in the spirit of OE-CAKE: 40 materials, machines that run, fire that spreads, and bit-exact replays. Coming to Steam November 2, 2026.">
+<link rel="icon" href="assets/icon-128.png">
+<style>
+  :root { color-scheme: dark;
+    --paper: #0c0913; --panel: #151022; --ink: #eae7de; --ink-2: #a49db0;
+    --hair: #2a2140; --accent: #b07df0;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink);
+    font: 400 1.02rem/1.65 var(--sans); padding: 3rem 1.25rem 5rem; }
+  main { max-width: 46rem; margin: 0 auto; }
+  .mark { width: 110px; display: block; margin: 0 auto 1rem;
+    filter: drop-shadow(0 0 24px rgba(176,125,240,0.45)); }
+  h1 { font: 800 2.2rem/1.15 var(--sans); text-align: center; letter-spacing: -0.02em; }
+  h1 b { color: var(--accent); }
+  .tag { text-align: center; color: var(--ink-2); margin: 0.6rem 0 2.2rem; }
+  h2 { font: 700 1.05rem/1.3 var(--sans); letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); margin: 2.2rem 0 0.7rem; }
+  p { margin-bottom: 0.9rem; }
+  ul { margin: 0 0 0.9rem 1.2rem; }
+  li { margin-bottom: 0.35rem; }
+  .facts { background: var(--panel); border: 1px solid var(--hair);
+    border-radius: 8px; padding: 1.1rem 1.3rem; }
+  .facts dt { color: var(--ink-2); font-size: 0.82rem; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-top: 0.7rem; }
+  .facts dt:first-child { margin-top: 0; }
+  .facts dd { margin: 0; }
+  footer { text-align: center; color: var(--ink-2); font-size: 0.82rem; margin-top: 3rem; }
+</style>
+</head>
+<body>
+<main>
+  <img class="mark" src="assets/logo.png" alt="SunaBox">
+  <h1><b>Suna</b>Box</h1>
+  <p class="tag">Paint matter. Set it on fire. Then press rewind.</p>
+
+  <h2>About</h2>
+  <p>SunaBox is a modern physics sandbox in the spirit of the legendary
+     OE-CAKE! (Prometech, 2007): 40 kinds of matter you paint straight into
+     the world, machines that really run, fire that really spreads, fireworks
+     that bloom in their own colours, and molten metal that sinks, cools, and
+     welds. Because the engine is bit-exact and deterministic, every session
+     is a starting state plus your inputs — replays are tiny, provable, and
+     land on the same bits on any machine.</p>
+  <p>It opens original OE-CAKE <code>.oec</code> scene files, preserved
+     exactly, and ships a Classic mode with the 2007 toolbar laid out the way
+     players remember it.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li>40 materials with real thermodynamics: melting, freezing, burning,
+        boiling, corrosion, detonation</li>
+    <li>Rigid, elastic and bonded solids; axles, jets and player-drivable
+        machines</li>
+    <li>Import any PNG as matter — rigid, liquid, or flammable</li>
+    <li>Bit-exact deterministic engine: perfect replays, rewind, byte-identical
+        shares</li>
+    <li>Classic OE-CAKE mode and <code>.oec</code> scene compatibility</li>
+    <li>Native builds for Windows, macOS and Linux, with Steam Deck support</li>
+  </ul>
+
+  <h2>Fact sheet</h2>
+  <dl class="facts">
+    <dt>Developer</dt><dd>Darien Bathalter (solo, USA)</dd>
+    <dt>Release</dt><dd>Full release November 2, 2026 — Steam (Windows, macOS, Linux, Steam Deck)</dd>
+    <dt>Engine</dt><dd>SunaEngine — custom deterministic fixed-point WebGPU particle engine (open source, AGPL-3.0)</dd>
+    <dt>Press contact</dt><dd>darienbathalter@gmail.com</dd>
+  </dl>
+
+  <footer>
+    <p>OE-CAKE! and OctaveEngine are the work of Prometech Software, Inc.
+       SunaBox is an independent project, not affiliated with or endorsed by
+       Prometech.</p>
+    <p>&copy; 2026 Darien Bathalter</p>
+  </footer>
+</main>
+</body>
+</html>
