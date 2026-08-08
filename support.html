@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+  SunaBox support page — sunabox.dev/support.html
+  Steam-compliant Support URL target: like press.html, DELIBERATELY contains
+  no play links and no nav that reaches the playable app. Keep it that way.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SunaBox — Support</title>
+<meta name="description" content="Support, FAQ and contact for SunaBox.">
+<link rel="icon" href="assets/icon-128.png">
+<style>
+  :root { color-scheme: dark;
+    --paper: #0c0913; --panel: #151022; --ink: #eae7de; --ink-2: #a49db0;
+    --hair: #2a2140; --accent: #b07df0;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink);
+    font: 400 1.02rem/1.65 var(--sans); padding: 3rem 1.25rem 5rem; }
+  main { max-width: 46rem; margin: 0 auto; }
+  .mark { width: 90px; display: block; margin: 0 auto 1rem;
+    filter: drop-shadow(0 0 20px rgba(176,125,240,0.4)); }
+  h1 { font: 800 1.9rem/1.15 var(--sans); text-align: center; }
+  h1 b { color: var(--accent); }
+  .tag { text-align: center; color: var(--ink-2); margin: 0.5rem 0 2rem; }
+  h2 { font: 700 1.0rem/1.3 var(--sans); letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin: 2rem 0 0.6rem; }
+  p { margin-bottom: 0.9rem; }
+  .qa { background: var(--panel); border: 1px solid var(--hair);
+    border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
+  .qa b { display: block; margin-bottom: 0.3rem; }
+  .contact { background: var(--panel); border: 1px solid var(--accent);
+    border-radius: 8px; padding: 1.1rem 1.3rem; text-align: center; }
+  a { color: var(--accent); }
+  footer { text-align: center; color: var(--ink-2); font-size: 0.82rem; margin-top: 3rem; }
+</style>
+</head>
+<body>
+<main>
+  <img class="mark" src="assets/logo.png" alt="SunaBox">
+  <h1><b>Suna</b>Box Support</h1>
+  <p class="tag">Stuck, broken, or curious? You're in the right place.</p>
+
+  <div class="contact">
+    <p><b>Email support:</b> <a href="mailto:darienbathalter@gmail.com">darienbathalter@gmail.com</a></p>
+    <p>SunaBox is made by one person — you'll get an answer from the developer,
+       usually within a day or two.</p>
+  </div>
+
+  <h2>Frequently asked</h2>
+  <div class="qa"><b>The game won't start / shows a GPU error.</b>
+    SunaBox needs WebGPU-class graphics. On desktop that means an up-to-date
+    Windows, macOS or Linux machine with current graphics drivers. The Steam
+    build ships everything else it needs.</div>
+  <div class="qa"><b>Something looks wrong after an update.</b>
+    A full restart of the app (or a hard refresh, on web builds) clears
+    mixed-version caches. If it persists, email a screenshot — screenshots of
+    bugs are gold.</div>
+  <div class="qa"><b>Can I open my old OE-CAKE files?</b>
+    Yes — drag any <code>.oec</code> scene in. SunaBox reads all four historic
+    versions and reports honestly what it could and couldn't reproduce.</div>
+  <div class="qa"><b>Where are my saves and replays?</b>
+    Scenes save as <code>.suna</code> files and replays as <code>.sunar</code> —
+    ordinary files you own, small enough to share anywhere. A replay reproduces
+    your session bit-for-bit on any machine.</div>
+  <div class="qa"><b>Refunds</b>
+    Steam purchases follow Steam's standard refund policy, handled entirely
+    through Steam.</div>
+  <div class="qa"><b>Found a bug? Have an idea?</b>
+    Email it. Include what you did, what you expected, and what happened
+    instead — replays (<code>.sunar</code>) attached to bug reports are the
+    fastest possible path to a fix, since they reproduce exactly.</div>
+
+  <footer>
+    <p>&copy; 2026 Darien Bathalter. OE-CAKE! and OctaveEngine are the work of
+       Prometech Software, Inc.; SunaBox is an independent project.</p>
+  </footer>
+</main>
+</body>
+</html>
